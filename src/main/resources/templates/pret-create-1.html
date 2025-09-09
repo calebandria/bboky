@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Ajouter prets</title>
+</head>
+
+<body class="sb-nav-fixed">
+    <section class="adherent-choice" layout:fragment="content">
+        <h1 class="mt-4">Prets</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/prets}">Prets</a></li>
+            <li class="breadcrumb-item active">Ajouter un pret</li>
+        </ol>
+
+            <h3>Choisir Adherent</h3>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>id_adherent</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>id_adherent</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                            </tr>
+                        </tfoot>
+                        <tbody class="adherent-info">
+                            <tr class="user" th:each="adherent :${adherents}">
+                                <td th:text="${adherent.idAdherent}">id_adherent</td>
+                                <td th:text="${adherent.nom}">Nom</td>
+                                <td th:text="${adherent.prenom}">Prenom</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <a class="btn btn-secondary" href="#" role="button" id="next">Suivant</a>
+
+
+
+           <!--  <h3>Livre</h3>
+            <input type="number" id="id_exemplaire" th:field="*"/>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <table id="datatablesExemplaire">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Titre</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Titre</th>
+                            </tr>
+                        </tfoot>
+                        <tbody class="exemplaire-info">
+                            <tr th:each="exemplaire :${exemplaires}" class="exemplaire">
+                                <td th:text="${exemplaire.idExemplaire}">Id</td>
+                                <td th:text="${exemplaire.title}">Titre</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="form-group mb-3">
+                <label class="h3" for="datePret">Date de pret</label>
+                <input type="datetime-local" 
+                       class="form-control" 
+                       name="datePret"
+                       th:field="*{datePret}"
+                       id="datePret" 
+                       placeholder="Date d'adhésion">
+                <p th:if="${#fields.hasErrors('datePret')}" class="text-danger" th:errors="*{datePret}"></p>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="h3" for="dateRemise">Date de remise</label>
+                <input type="datetime-local" 
+                       class="form-control" 
+                       name="dateRemise"
+                       th:field="*{dateRemise}"
+                       id="dateRemise" 
+                       disabled
+                       placeholder="Date d'adhésion">
+                <p th:if="${#fields.hasErrors('dateRemise')}" class="text-danger" th:errors="*{dateRemise}"></p>
+            </div>
+            <button type="submit" class="btn btn-primary ">Attribuer</button> -->
+    </section>
+</body>
+
+</html>

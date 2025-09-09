@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Adherent liste</title>
+</head>
+
+<body class="sb-nav-fixed">
+    <section layout:fragment="content">
+        <h1 class="mt-4">Livres</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Liste des adherents</li>
+        </ol>
+        <div class="card mb-4">
+            <!-- <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                DataTable Example
+            </div> -->
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Date d'adhésion</th>
+                            <th>Rôle</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Date d'adhésion</th>
+                            <th>Rôle</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr th:each="adherent :${adherents}">
+                            <td th:text="${adherent.nom}">Nom</td>
+                            <td th:text="${adherent.prenom}">Prenom</td>
+                            <td th:text="${adherent.dateAdhesion}">Date d'adhesion</td>
+                            <td th:text="${adherent.role}">Rôle</td>
+                            <td>
+                                <a class="btn btn-outline-primary" th:href="@{/admin/adherents/{idAdherent}/edit(idAdherent=${adherent.idAdherent})}"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-outline-danger" th:href="@{/admin/adherents/{idAdherent}/delete(idAdherent=${adherent.idAdherent})}"><i class="fa-solid fa-trash"></i></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a class="btn btn-outline-success" th:href="@{/admin/adherents/new}"><i class="fa-solid fa-plus"></i> Ajouter un adhérent</a>
+    </section>
+</body>
+
+</html>

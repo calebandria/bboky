@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <title>Livres creation</title>
+</head>
+
+<body class="sb-nav-fixed">
+    <section layout:fragment="content">
+        <h1 class="mt-4">Editer livre</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/livres}">Livres</a></li>
+            <li class="breadcrumb-item active">Editer livre</li>
+        </ol>
+
+        <form role="form" method="post" th:action="@{/exemplaires/{idLivre}/new(idLivre=${idLivre})}" th:object="${exemplaire}">
+            <input type="hidden" th:field="*{idExemplaire}">
+            <div class="container">
+                <div class="form-check">
+                    <input class="form-check-input" id="availability" type="radio" th:value=true checked>
+                    <label class="form-check-label">
+                      Disponible
+                    </label>
+                    <!-- <p th:if="${#fields.hasErrors('role')}" class="text-danger" th:errors="*{role}"></p> -->
+                  </div>
+                <button type="submit" class="btn btn-primary ">Ajouter</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

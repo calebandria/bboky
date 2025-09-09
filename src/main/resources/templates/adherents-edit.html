@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <title>Livres creation</title>
+</head>
+
+<body class="sb-nav-fixed">
+    <section layout:fragment="content">
+        <h1 class="mt-4">Éditer adherent</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/adherents}">Adherents</a></li>
+            <li class="breadcrumb-item active">Éditer adherent</li>
+        </ol>
+        <form role="form" method="post" th:action="@{/admin/adherents/{idAdherent}/edit(idAdherent=${adherent.idAdherent})}" th:object="${adherent}">
+            <div class="container">
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="nom"
+                           th:field="*{nom}"
+                           id="nom" 
+                           placeholder="Entrer le nom de l'adherent">
+                        <p th:if="${#fields.hasErrors('nom')}" class="text-danger" th:errors="*{nom}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prenom</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="prenom"
+                           th:field="*{prenom}"
+                           id="prenom" 
+                           placeholder="Entrer le prenom">
+                    <p th:if="${#fields.hasErrors('prenom')}" class="text-danger" th:errors="*{prenom}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="dateAdhesion">Date d'adhésion</label>
+                    <input type="datetime-local" 
+                           class="form-control" 
+                           name="dateAdhesion"
+                           th:field="*{dateAdhesion}"
+                           id="dateAdhesion" 
+                           placeholder="Date d'adhésion">
+                    <p th:if="${#fields.hasErrors('dateAdhesion')}" class="text-danger" th:errors="*{dateAdhesion}"></p>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="role">Role</label>
+                    <input type="radio" 
+                           class="form-control" 
+                           name="role"
+                           th:field="*{role}"
+                           id="role" 
+                           placeholder="Entrer le prenom">
+                    <p th:if="${#fields.hasErrors('role')}" class="text-danger" th:errors="*{role}"></p>
+                </div> -->
+
+                <div class="form-check" th:each="role: ${T(com.kaleba.bookrental.bookrental.model.Role).values()}">
+                    <input class="form-check-input" type="radio" name="role" id="flexRadioDefault"  th:field="*{role}" th:value="${role}">
+                    <label class="form-check-label" th:for="${#ids.next('role')}" th:text="${role}">
+                      Disabled radio
+                    </label>
+                    <p th:if="${#fields.hasErrors('role')}" class="text-danger" th:errors="*{role}"></p>
+                  </div>
+
+                <button type="submit" class="btn btn-primary ">Éditer</button>
+            </div>
+        </form>
+    </section>
+</body>
+
+</html>

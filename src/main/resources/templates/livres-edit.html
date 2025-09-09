@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <title>Livres edition</title>
+</head>
+
+<body class="sb-nav-fixed">
+    <section layout:fragment="content">
+        <h1 class="mt-4">Editer livre</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/livres}">Livres</a></li>
+            <li class="breadcrumb-item active">Editer livre</li>
+        </ol>
+        <form role="form" method="post" th:action="@{/livres/{idLivre}/edit(idLivre=${livre.idLivre})}" th:object="${livre}">
+            <input type="hidden" th:field="*{idLivre}">
+            <div class="container">
+                <div class="form-group">
+                    <label for="titre">Titre</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="titre"
+                           th:field="*{titre}"
+                           id="titre" 
+                           aria-describedby="emailHelp"
+                           placeholder="Entrer le titre du livre">
+                    <p th:if="${#fields.hasErrors('titre')}" class="text-danger" th:errors="*{titre}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="auteur">Auteur</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="auteur"
+                           th:field="*{auteur}"
+                           id="ateur" 
+                           placeholder="Nom de l'auteur">
+                    <p th:if="${#fields.hasErrors('auteur')}" class="text-danger" th:errors="*{auteur}"></p> 
+                </div>
+                <div class="form-group mb-3">
+                    <label for="edition">Edition</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="edition"
+                           th:field="*{edition}"
+                           id="edition" 
+                           placeholder="Maison d'édition">
+                    <p th:if="${#fields.hasErrors('edition')}" class="text-danger" th:errors="*{edition}"></p>
+                </div>
+                <button type="submit" class="btn btn-primary ">Éditer</button>
+            </div>
+        </form>
+    </section>
+</body>
+
+</html>

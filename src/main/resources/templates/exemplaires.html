@@ -1,0 +1,25 @@
+
+    <table id="datatableSimple">
+        <thead>
+            <th>Action</th>
+            <th>Nombre</th>
+            <th>Dispo</th>
+        </thead>
+        <tfoot>
+            <th>Action</th>
+            <th>Nombre</th>
+            <th>Dispo</th>
+        </tfoot>
+        <tbody>
+            <td>
+                <a class="btn btn-outline-secondary"
+                    th:href="@{/exemplaires/{idLivre}/new(idLivre=${livre.idLivre})}"><i
+                        class="fa-solid fa-plus"></i></i></a>
+                <a class="btn btn-outline-secondary"
+                    th:href="@{/exemplaires/{idLivre}/view(idLivre=${livre.idLivre})}"><i
+                        class="fa-solid fa-eye"></i></i></a>
+            </td>
+            <td th:text="${livre.exemplaires.size()}">Nombre</td>
+            <td th:text="${livre.getExemplaireDispo()}">Dispo</td>
+        </tbody>
+    </table>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <title>Livres creation</title>
+</head>
+
+<body class="sb-nav-fixed">
+    <section layout:fragment="content">
+        <h1 class="mt-4">Exemplaires</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/livres}">Livres</a></li>
+            <li class="breadcrumb-item active" th:text="${titre}"></li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Disponiblité</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Disponiblité</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody id="tab-target">
+                          <tr th:each="exemplaire :${exemplaires}" class="exemplaire">
+                            <td th:text="${exemplaire.idExemplaire}">Id</td>
+                            <td th:text="${exemplaire.viewValue}">Disponibilité</td>
+                            <td>
+                                <button class="btn btn-outline-danger"><a th:href="@{/exemplaires/{idExemplaire}/delete(idExemplaire=${exemplaire.idExemplaire})}"><i class="fa-solid fa-trash"></i></a></button>
+                            </td>
+                        </tr>  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

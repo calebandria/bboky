@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Pret liste</title>
+</head>
+
+<body class="sb-nav-fixed">
+    <section layout:fragment="content">
+        <h1 class="mt-4">Prets</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Liste des prets</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Date de pret</th>
+                            <th>Date de remise</th>
+                            <th>Adherent</th>
+                            <th>Livre</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>id</th>
+                            <th>Date de pret</th>
+                            <th>Date de remise</th>
+                            <th>Adherent</th>
+                            <th>Livre</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr th:each="pret :${prets}">
+                            <td th:text="${pret.idPret}">id</td>
+                            <td th:text="${pret.datePret}">Date de pret</td>
+                            <td th:text="${pret.dateRemise}">Date de remise</td>
+                            <td th:text="${pret.adherentName}">Adherent</td>
+                            <td th:text="${pret.exemplaireTitle}">Action</td>
+                            <td>
+                                <a class="btn btn-outline-primary" th:href="@{prets/{idPret}/{idExemplaire}/delete(idPret=${pret.idPret},idExemplaire=${pret.idExemplaire})}"><i class="fa-solid fa-rotate-left"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a class="btn btn-outline-success" th:href="@{/prets/new}"><i class="fa-solid fa-plus"></i> Ajouter un pret</a>
+        <a class="btn btn-outline-primary" th:href="@{/livres}"><i class="fa-solid fa-eye"></i> Voir les livres <i class="fa-solid fa-book"></i></a>
+    </section>
+
+</body>
+
+</html>
