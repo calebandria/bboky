@@ -15,6 +15,8 @@ public interface UserService {
 
     User saveUser(UserDto userDto);
 
+    User saveSimpleUser(UserDto userDto);
+
     UserDto findUserById(String idUser);
 
     void updateUser(UserDto user);

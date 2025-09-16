@@ -1,9 +1,11 @@
 package com.bookrental.bboky.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bookrental.bboky.dto.UserDto;
@@ -16,23 +18,26 @@ import com.bookrental.bboky.service.UserService;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    
-    public UserServiceImpl(UserRepository userRepository){
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public List<User> findAllUsers(){
+    public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public List<UserDto> findAllUserDto(){
+    public List<UserDto> findAllUserDto() {
         List<User> users = userRepository.findAll();
         return users.stream().map(user -> mapToUserDto(user)).collect(Collectors.toList());
     }
 
-    private UserDto mapToUserDto(User user){
+    private UserDto mapToUserDto(User user) {
         UserDto userDto = new UserDto();
 
         userDto.setUsername(user.getUsername());
@@ -45,24 +50,44 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(UserDto userDto){
+    public User saveUser(UserDto userDto) {
         User user = mapToUser(userDto);
+        user.setDateAdhesion(LocalDateTime.now());
         return userRepository.save(user);
     }
 
-    private User mapToUser(UserDto userDto){
+    @Override
+    public User saveSimpleUser(UserDto userDto) {
+        User user = mapToUserSimple(userDto);
+        user.setDateAdhesion(LocalDateTime.now());
+        return userRepository.save(user);
+    }
+
+    private User mapToUser(UserDto userDto) {
         User user = new User();
 
         user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setFirstname(userDto.getFirstname());
-        user.setLastname(user.getLastname());
+        user.setLastname(userDto.getLastname());
         user.setRole(Role.valueOf(userDto.getRole()));
 
         return user;
     }
 
-     @Override 
+    private User mapToUserSimple(UserDto userDto) {
+        User user = new User();
+
+        user.setUsername(userDto.getUsername());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setFirstname(userDto.getFirstname());
+        user.setLastname(userDto.getLastname());
+        user.setRole(Role.valueOf("USER"));
+
+        return user;
+    }
+
+    @Override
     public UserDto findUserById(String idUser) {
         User user = userRepository.findById(idUser).get();
         return mapToUserDto(user);
@@ -74,7 +99,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    @Override  
+    @Override
     public void deleteUser(String idUser) {
         userRepository.deleteById(idUser);
     }
