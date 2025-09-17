@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css" /> -->
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" href="/css/pret-create.css">
+    <link rel="stylesheet" href="/css/logout.css">
     <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Bookstore</title>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -44,7 +45,14 @@
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li class="dropdown-item-wrapper">
+                        <form th:action="@{/logout}" method="post" style="display:inline;">
+                            <button type="submit"
+                                style="border: none; background: none; color: inherit; padding: 0.25rem 1rem; width: 100%; text-align: left;">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </li>
         </ul>

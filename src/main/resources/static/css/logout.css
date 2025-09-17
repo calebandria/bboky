@@ -1,0 +1,31 @@
+/* Style the wrapper to act like a dropdown-item */
+.dropdown-item-wrapper {
+  display: block;
+  width: 100%;
+  padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+  clear: both;
+  font-weight: 400;
+  color: var(--bs-dropdown-link-color);
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+/* Style the button inside the wrapper */
+.dropdown-item-wrapper button {
+  border: none;
+  background: none;
+  color: inherit;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+}
+
+/* Apply hover and focus effects */
+.dropdown-item-wrapper:hover,
+.dropdown-item-wrapper:focus {
+  color: var(--bs-dropdown-link-hover-color);
+  background-color: var(--bs-dropdown-link-hover-bg);
+}
